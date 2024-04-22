@@ -1,0 +1,30 @@
+﻿@page "/admin/roles"
+@model TopCV.Areas.Admin.Pages.Role.IndexModel
+@{
+    ViewData["Title"] = "Role List";
+}
+<h2>@ViewData["Title"]</h2>
+<partial name="_StatusMessage" model="@Model.StatusMessage"></partial>
+<div class="mb-2">
+    <a class="btn btn-secondary" asp-page="./Create">Create Role</a>
+</div>
+
+<table class="table">
+    <tr>
+        <th>Name Role</th>
+        <th>Action</th>
+    </tr>
+    @foreach(var role in Model.roles)
+    {
+        <tr>
+            <td>@role.Name</td>
+            <td>
+                <a class="btn btn-success btn-sm" asp-page="./Edit" asp-route-roleid="@role.Id">Edit</a>
+                <a class="btn btn-success btn-sm" asp-page="./Delete" asp-route-roleid="@role.Id">Delete</a>
+            </td>
+            <td></td>
+
+        </tr>
+    }
+   
+</table>

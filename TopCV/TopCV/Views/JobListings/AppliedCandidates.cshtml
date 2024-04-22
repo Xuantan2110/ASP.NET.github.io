@@ -1,0 +1,23 @@
+﻿@model List<TopCV.ViewModels.AppliedCandidateViewModel>
+
+<h2>List of Applied Candidates</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Phone Number</th>
+            <th>CV File</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var application in Model)
+        {
+            <tr>
+                <td>@application.Email</td>
+                <td>@application.PhoneNumber</td>
+                <td><a href="@Url.Action("Download", "JobApplications", new { id = application.JobApplication.Id })">Download</a></td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,13 @@
+﻿@page "/admin/Delete-roles/{roleid}"
+@model TopCV.Areas.Admin.Pages.Role.DeleteModel
+@{
+    ViewData["Title"] = "Detele Role";
+}
+<h2>@ViewData["Title"]</h2>
+<partial name="_StatusMessage" model="@Model.StatusMessage"></partial>
+<hr>
+<form method="post">
+    <p>Are you sure you want to delete?<strong>@Model.role.Name</strong></p>
+    <button type="submit" class="btn btn-primary">Yes</button>
+    <a class="btn btn-primary" asp-page="./Index">List of role</a>
+</form>

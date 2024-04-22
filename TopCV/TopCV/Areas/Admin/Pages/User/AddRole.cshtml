@@ -1,0 +1,31 @@
+﻿@page "/admin/assign-user-role/{id}"
+@model TopCV.Areas.Admin.Pages.User.AddRoleModel
+@{
+    ViewData["Title"] = "Set role";
+}
+<h4>Set role for users:</h4>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row">
+    <div class="col-md-6">
+        <form id="change-password-form" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
+            <div class="form-floating mb-3">
+                <label asp-for="RoleNames" class="form-label"></label>
+                <br></br>
+                @Html.ListBoxFor(m=>m.RoleNames,Model.allRoles, new
+                {
+                id="id-select-roles",
+                @class="form-control"
+                })        
+                <span asp-validation-for="RoleNames" class="text-danger"></span>
+            </div>
+            <button type="submit" class="w-100 btn btn-lg btn-primary">Update role</button>
+            <br></br>
+            <a class="btn btn-primary" asp-page="./Index">List of users</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

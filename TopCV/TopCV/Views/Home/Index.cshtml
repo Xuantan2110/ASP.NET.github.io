@@ -1,0 +1,60 @@
+﻿@model TopCV.ViewModels.HomeIndexViewModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@{
+    var imagePath = Url.Content("~/Images/1.png");
+}
+<style>
+    .image-container {
+        width: 100%;
+        height: auto;
+        padding-bottom: 30px;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: auto; 
+        display: block; 
+        margin: 0 auto; 
+    }
+</style>
+<div class="image-container">
+    <img src="@imagePath" alt="Career Image">
+</div>
+
+
+<h3>Where Careers Begin and Dreams Take Flight</h3>
+
+<div style="display: flex; justify-content: center;" class="mb-3">
+    <div class="col-md-6">
+        <form asp-action="Index" method="get">
+            <div class="input-group">
+                <input type="text" class="form-control" name="searchString" placeholder="Search for job title...">
+                <div style="padding-left: 3px" class="input-group-append">
+                    <button class="btn btn-outline-primary" type="submit">Search</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    @foreach (var item in Model.JobListingsWithUserEmail)
+    {
+                <div class="col-md-3">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.Item1.Title)</h5>
+                            <p class="card-text" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">@Html.DisplayFor(modelItem => item.Item1.Description)</p>
+                            <p class="card-text">Company: @Html.DisplayFor(modelItem => item.Item1.CompanyName)</p>
+                            <p class="card-text">Position: @Html.DisplayFor(modelItem => item.Item1.Position)</p>
+                            <p class="card-text">Salary: @Html.DisplayFor(modelItem => item.Item1.Salary)</p>
+                            <div class="text-center">
+                                <a href="@Url.Action("Details", "JobListings", new { id = item.Item1.Id })" class="btn btn-primary mx-auto btn-sm">Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    }
+</div>

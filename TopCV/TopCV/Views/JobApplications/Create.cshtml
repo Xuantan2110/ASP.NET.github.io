@@ -1,0 +1,35 @@
+﻿@model TopCV.Models.JobApplication
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>JobApplication</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="UploadFile" class="control-label"></label>
+                <input asp-for="UploadFile" type="file" class="form-control" />
+                <span asp-validation-for="UploadFile" class="text-danger"></span>
+            </div>
+            <input type="hidden" asp-for="JobListingId" />
+            <input type="hidden" asp-for="UserId" />
+            <div class="form-group">
+                <input style="margin-top: 5px" type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a style="margin-top: 5px" class="btn btn-primary" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

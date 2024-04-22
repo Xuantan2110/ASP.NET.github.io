@@ -1,0 +1,53 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+<ul class="navbar-nav">
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">@User.Identity?.Name!</a>
+        </li>
+        @if (User.IsInRole("Employer"))
+        {
+                    <li class="nav-item">
+                <a class="nav-link text-dark" href="/JobListings/Index" title="Manage Job">Manage Job</a>
+                    </li>
+        }
+        @if (User.IsInRole("Admin"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Locations/Index" title="Manage Location">Manage Location</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Admin/users" title="Manage User">Manage User</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/Admin/roles" title="Manage Role">Manage Role</a>
+            </li>
+        }
+        @if (User.IsInRole("Employee"))
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" href="/JobApplications/Index" title="Manage My Iob Applied">Manage My Job Applied</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-dark" title="Request Become To Employer">Request Become To Employer</a>
+            </li>
+        }
+        <li class="nav-item">
+            <form class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register">Register</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login</a>
+        </li>
+    }
+</ul>

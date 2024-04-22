@@ -1,0 +1,31 @@
+﻿    @page "/admin/users"
+    @model TopCV.Areas.Admin.Pages.User.IndexModel
+    @{
+        ViewData["Title"] = "User Role List";
+    }
+    <h2>@ViewData["Title"]</h2>
+    <partial name="_StatusMessage" model="@Model.StatusMessage"></partial>
+    <table class="table">
+        <tr>
+            <th>User Name</th>
+            <th>Phone Number</th>
+            <th>Role</th>
+        </tr>
+    @foreach (var user in Model.UsersWithRoles)
+        {
+            <tr>
+                <td>@user.UserName</td>
+                <td>@user.PhoneNumber</td>
+                <td>
+                @if (string.IsNullOrEmpty(user.RoleNames))
+                {
+                    <a class="text-dark" asp-page="./AddRole" asp-route-id="@user.UserId">+ Add roles</a>
+                }
+                else{
+                <a asp-page="./AddRole" asp-route-id="@user.UserId">@user.RoleNames</a>
+                }
+                </td>           
+            </tr>
+        }
+
+    </table>

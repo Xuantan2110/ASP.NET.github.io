@@ -1,0 +1,46 @@
+﻿@model TopCV.Models.JobListing
+
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<style>
+    .card-body {
+        display: inline-block;
+        justify-content: center;
+        text-align: center;
+    }
+
+    /* Thu nhỏ phần card */
+    .card {
+        width: 50%;
+        margin: 0 auto;
+    }
+</style>
+
+<div class="container">
+    <h1 class="mt-5 text-center">Detail</h1>
+
+    <div class="card border-dark">
+        <div class="card-body p-3" style="background-color: #e9ecef;">
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <h5 class="card-title">@Html.DisplayFor(modelItem => Model.Title)</h5>
+                    <p class="card-text">@Html.DisplayFor(modelItem => Model.Description)</p>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Company: <span class="float-right">@Html.DisplayFor(modelItem => Model.CompanyName)</span></li>
+                        <li class="list-group-item">Position: <span class="float-right">@Html.DisplayFor(modelItem => Model.Position)</span></li>
+                        <li class="list-group-item">Salary: <span class="float-right">@Html.DisplayFor(modelItem => Model.Salary)</span></li>
+                        <li class="list-group-item">Location: <span class="float-right">@Html.DisplayFor(modelItem => Model.Location.LocationName)</span></li>
+                    </ul>
+                    @if (User.IsInRole("Employee"))
+                    {
+                        <form asp-action="Apply" asp-route-jobListingId="@Model.Id" method="post">
+                            <button style="margin-top: 5px" type="submit" class="btn btn-primary">Apply</button>
+                        </form>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
